@@ -2,6 +2,7 @@ package com.example.hw2_hannahjuarez
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -30,7 +31,7 @@ class SortingAndSearchingActivity : AppCompatActivity() {
                 textB += arrayB[arrayB.size - i].toString()
                 if (i < 10) textB += ", "
 
-                arrayS[i - 1] = (75 - i).toChar().toString()
+                arrayS[i - 1] = (64 + i).toChar().toString()
                 textS += arrayS[i - 1]
                 if (i < 10) textS += ", "
             }
@@ -44,7 +45,7 @@ class SortingAndSearchingActivity : AppCompatActivity() {
             var textA: String = ""
             var textB: String = ""
 
-            merge(arrayA,arrayB,9,9)
+            merge(arrayA, arrayB, 9, 9)
             for (i in 1..20 step 1) {
                 textA += arrayA[i - 1].toString()
                 if (i < 20) textA += ", "
@@ -57,13 +58,11 @@ class SortingAndSearchingActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.text_view_displayA).text = textA
             findViewById<TextView>(R.id.text_view_displayB).text = textB
         }
-        // The search function was the only issue I ran into. I'm sure it has to do with all
-        // of the suggested changes that I blindly accepted. It seems to properly accept the
-        // input as a string and pass it to the search function, but for some reason it fails
-        // the comparison test.
+
         findViewById<Button>(R.id.button_search).setOnClickListener {
             val str: String = findViewById<EditText>(R.id.input_search_value).text.toString()
             val result: Int = search(arrayS, str)
+            Log.d("search result", result.toString())
             val view: TextView = findViewById<TextView>(R.id.text_view_results)
 
             if (result == -1)
@@ -77,6 +76,7 @@ class SortingAndSearchingActivity : AppCompatActivity() {
 
     private fun searchR(strings: Array<String?>, str: String, first: Int, last: Int): Int {
         if (first > last) return -1
+        Log.d("first > last", "true")
 
         // Move mid to the middle
         var mid: Int = (first + last) / 2
@@ -107,6 +107,8 @@ class SortingAndSearchingActivity : AppCompatActivity() {
         }
     }
 
+    // search() requires that the array elements be sorted from least to
+    // greatest otherwise it will fail to search properly.
     private fun search(strings: Array<String?>, str: String): Int {
         if (str == "") return -1
         return searchR(strings, str, 0, strings.size - 1)
