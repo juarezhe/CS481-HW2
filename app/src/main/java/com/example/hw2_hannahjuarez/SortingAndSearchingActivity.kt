@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import org.w3c.dom.Text
 
 class SortingAndSearchingActivity : AppCompatActivity() {
     private val arrayA: Array<Int?> = arrayOfNulls<Int>(20)
