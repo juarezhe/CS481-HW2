@@ -116,7 +116,7 @@ class SortingAndSearchingActivity : AppCompatActivity() {
     private fun merge(a: Array<Int?>, b: Array<Int?>, lastA: Int, lastB: Int) {
         var indexA: Int = lastA - 1 // Index of last element in array a
         var indexB: Int = lastB - 1 // Index of last element in array b
-        var indexMerged: Int = lastA + lastB + 1 // End of merged array
+        var indexMerged: Int = lastA + lastB - 1 // End of merged array
 
         // Merge a and b, starting from the last element in each
         while (indexA >= 0 && indexB >= 0) {
@@ -130,6 +130,11 @@ class SortingAndSearchingActivity : AppCompatActivity() {
                 indexMerged--
                 indexB--
             }
+        }
+        while (indexB >= 0) {
+            a[indexMerged] = b[indexB]
+            indexMerged--
+            indexB--
         }
     }
 }
